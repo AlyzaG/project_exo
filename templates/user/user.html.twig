@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="container mt-5">
+            {{ form_start(form) }}
+            {{form_row(form.nom)}}
+            {{form_row(form.prenom)}}
+            {{form_row(form.email)}}
+            {{form_row(form.created_at)}}
+            <select name="taskId" id="">
+                {% for tasks in task %}
+                    <option value="{{ tasks.id }}">{{tasks.nom}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Envoyer</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock body %}

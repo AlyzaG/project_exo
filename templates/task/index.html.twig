@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+
+    <div class="example-wrapper">
+        <h1>Liste des tâches </h1>
+
+            <form action="" method="post">
+                <input type="text" name="nom" placeholder="Nom">
+                <input type="text" name="deadline" placeholder="deadline">
+                <input type="text" name="utilisateur" placeholder="utilisateur">
+                <select name="taskId" placeholder="etat">
+                    {% for task in task %}
+                        <option value=""></option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        {% if task is not empty %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Deadline</th>
+                    <th>Utilisateur</th>
+                    <th>Etat</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for tasks in task %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('updateTask', {'id':tasks.id}) }}">
+                                {{ tasks.nom }}
+                            </a>
+
+                        </td>
+                        <td>
+                            {{ tasks.deadline|date }}
+                        </td>
+
+                        <td>
+                            {{ tasks.utilisateur }}
+                        </td>
+                        {% if tasks.etat == 1 %}
+                            <td>
+                            ✅
+                            </td>
+                        {% else %}
+                            <td>
+                                ❌
+                            </td>
+
+                        {%  endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        {% else %}
+            <p>Il n'y a aucune utilisateur</p>
+        {% endif %}
+    </div>
+{% endblock %}
